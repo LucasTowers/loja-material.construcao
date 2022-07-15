@@ -1,0 +1,256 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 01-Jul-2022 às 03:51
+-- Versão do servidor: 10.4.24-MariaDB
+-- versão do PHP: 7.4.29
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Banco de dados: `loja`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `compra`
+--
+
+CREATE TABLE `compra` (
+  `id` int(20) NOT NULL,
+  `descricao` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `id_usuario` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `compra`
+--
+
+INSERT INTO `compra` (`id`, `descricao`, `id_usuario`) VALUES
+(1, 'compra1', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `item_compra`
+--
+
+CREATE TABLE `item_compra` (
+  `id` int(2) NOT NULL,
+  `id_compra` int(20) NOT NULL,
+  `id_produto` int(20) NOT NULL,
+  `quantidade` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `item_compra`
+--
+
+INSERT INTO `item_compra` (`id`, `id_compra`, `id_produto`, `quantidade`) VALUES
+(7, 1, 2, 2),
+(39, 2, 9, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `marca`
+--
+
+CREATE TABLE `marca` (
+  `id` int(20) NOT NULL,
+  `descricao` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `marca`
+--
+
+INSERT INTO `marca` (`id`, `descricao`) VALUES
+(1, 'Bosch'),
+(2, 'Ferromax'),
+(3, 'Cobrecom'),
+(4, 'Repac'),
+(5, 'Sparta'),
+(6, 'Plastcor'),
+(7, 'Vulcaflex'),
+(8, 'Proteplus');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `produto`
+--
+
+CREATE TABLE `produto` (
+  `id` int(100) NOT NULL,
+  `descricao` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo` int(20) NOT NULL,
+  `val_unitario` float(7,2) NOT NULL DEFAULT 0.00,
+  `marca` int(20) NOT NULL,
+  `especificacoes` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `classificacao` int(11) NOT NULL DEFAULT 2,
+  `imagemProduto` varchar(150) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `produto`
+--
+
+INSERT INTO `produto` (`id`, `descricao`, `tipo`, `val_unitario`, `marca`, `especificacoes`, `classificacao`, `imagemProduto`) VALUES
+(1, 'Parafusadeira/Furadeira de Impacto a Bateria 18V.\r\n', 1, 990.00, 1, 'Parafusadeira/Furadeira de Impacto 1/2 Pol. GSB 180-LI 18V.', 1, 'imagem/parafusadeira2.jpg'),
+(2, 'Ferragem armada - 4 ferros 3/8\" - 9 x 20 cm est 4,2 mm', 4, 300.00, 2, 'A ferragem armada é o produto ideal para sua construção. Economize tempo e mão de obra comprando colunas e vigas armada.', 1, 'imagem/ferragem2.jpg'),
+(3, 'Fio Flexível 2,5mm Rolo Com 100 Metros Cobre', 2, 160.00, 3, 'Cabo Flexível 2,5mm 750v Com 100 metros TENSÃO: 450/750V', 2, 'imagem/fio_cobre.jpg'),
+(4, '40 Ripas de madeira Pinus para Artesanato', 3, 42.90, 4, '40 Ripas para Artesanato Repac Madeiras Pinus 2x0,5x100cm', 2, 'imagem/madeira.jpg'),
+(5, 'Macaco Hidráulico Tipo Jacaré De 2 Toneladas.', 5, 80.00, 5, 'Os macacos hidráulicos sparta tipo jacaré possuem uma válvula de segurança para elevação de cargas', 2, 'imagem/macaco.jpg'),
+(6, 'Capacete de Seguranca Amarelo', 6, 20.00, 6, 'Capacete PLT- Plastcor O Capacete PLT da marca Plastcor é um capacete de segurança com aba frontal e copa com estrias. Produzido em polietileno de alta densidade injetado. Já a suspensão é uma peça única fabricada em polietileno de baixa densidade injetado.', 2, 'imagem/capacete.jpg'),
+(7, 'Botina Bota de Segurança para Trabalho', 7, 50.00, 7, '- Bota de segurança confeccionada em couro.\r\n- Biqueira de polipropileno.\r\n', 1, 'imagem/bota.jpg'),
+(8, 'Colete Refletivo Segurança com Bolso com Ziper', 8, 35.00, 8, 'Colete refletivo tipo jaqueta com bolso e fechamento em ziper Proteplus\r\nColete de segurança tipo blusão para sinalização para rodovias, fabrica, galpões, aeroportos, estacionamentos, obras em geral entre outros.', 1, 'imagem/colete4.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tipo`
+--
+
+CREATE TABLE `tipo` (
+  `id` int(20) NOT NULL,
+  `descricao` varchar(60) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `tipo`
+--
+
+INSERT INTO `tipo` (`id`, `descricao`) VALUES
+(1, 'Ferramentas'),
+(2, 'Elétrica'),
+(3, 'Madeira'),
+(4, 'Ferragens'),
+(5, 'Hidraulicos'),
+(6, 'Capacetes'),
+(7, 'Botas'),
+(8, 'Coletes');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id` int(100) NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `senha` varchar(244) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(2) NOT NULL DEFAULT 1,
+  `nome` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `cpf` char(14) COLLATE utf8_unicode_ci NOT NULL,
+  `tipo` int(3) NOT NULL DEFAULT 2
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `email`, `senha`, `status`, `nome`, `cpf`, `tipo`) VALUES
+(1, 'a@a.com', '123', 1, 'root', '111.111.111-11', 1),
+(7, 'b@a.com', '123', 1, 'teste', '22222222222', 2);
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `compra`
+--
+ALTER TABLE `compra`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `item_compra`
+--
+ALTER TABLE `item_compra`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_item_compraxcompra` (`id_compra`),
+  ADD KEY `fk_item_compraxproduto` (`id_produto`);
+
+--
+-- Índices para tabela `marca`
+--
+ALTER TABLE `marca`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `produto`
+--
+ALTER TABLE `produto`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_produtoMarca` (`marca`),
+  ADD KEY `fk_produtoTipo` (`tipo`);
+
+--
+-- Índices para tabela `tipo`
+--
+ALTER TABLE `tipo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `compra`
+--
+ALTER TABLE `compra`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de tabela `item_compra`
+--
+ALTER TABLE `item_compra`
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT de tabela `marca`
+--
+ALTER TABLE `marca`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de tabela `produto`
+--
+ALTER TABLE `produto`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192;
+
+--
+-- AUTO_INCREMENT de tabela `tipo`
+--
+ALTER TABLE `tipo`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
